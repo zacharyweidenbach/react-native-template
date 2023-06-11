@@ -1,0 +1,31 @@
+{
+  "extends": [
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "plugins": [
+    "@typescript-eslint/eslint-plugin",
+    "no-relative-import-paths"
+  ],
+  "overrides": [
+    {
+      // next/core-web-vitals has an issue linting non-jsx/tsx files in vscode
+      // https://github.com/vercel/next.js/issues/40687#issuecomment-1378845989
+      "files": ["*.js"],
+      "parser": "espree",
+      "parserOptions": {
+        "ecmaVersion": 2020
+      }
+    }
+  ],
+  "rules": {
+    "no-relative-import-paths/no-relative-import-paths": "error",
+    "@typescript-eslint/no-unused-vars": [
+      "error", 
+      {
+        "vars": "all",
+        "args": "none",
+        "ignoreRestSiblings": true
+      }
+    ]
+  }
+}
