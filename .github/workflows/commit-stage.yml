@@ -1,0 +1,40 @@
+name: RNTemplate Commit Stage
+on: [pull_request]
+env:
+  NODE_VERSION: "19.4.0"
+defaults:
+  run:
+    shell: bash
+    working-directory: RNTemplate
+jobs:
+  commit:
+    name: "Commit Stage"
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v2
+
+      - name: "Setup Node"
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: "Restore Node Modules Cache"
+        uses: actions/cache@v2
+        id: node-modules-cache
+        with:
+          path: ./RNTemplate/node_modules
+          key: ${{ runner.os }}-node-modules-cache-${{ hashFiles('RNTemplate/yarn.lock') }}-${{ env.NODE_VERSION }}
+
+      - name: "Install Dependencies"
+        run: yarn
+
+      - name: "Type Checking"
+        run: yarn tsc
+
+      - name: "Linting"
+        run: yarn lint
+
+      - name: "Formating"
+        run: yarn format:ci
