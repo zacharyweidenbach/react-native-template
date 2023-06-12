@@ -11,7 +11,8 @@
     "lint:ci": "eslint \"**/*.{ts,tsx}\" --quiet --max-warnings 0",
     "format": "prettier --write \"**/*.{js, jsx, ts, tsx}\"",
     "format:ci": "prettier --check \"**/*.{js, jsx, ts, tsx}\"",
-    "precommit": "yarn tsc && yarn lint:ci && yarn format:ci"
+    "precommit": "yarn tsc && yarn lint:ci && yarn format:ci",
+    "postcommit": "yarn tsc && yarn lint:ci && yarn format:ci"
   },
   "dependencies": {
     "@react-navigation/native": "^6.1.6",

@@ -1,5 +1,8 @@
-name: RNTemplate Commit Stage
-on: [pull_request]
+name: RNTemplate Merge Stage
+on:
+  push:
+    branches:
+      - main
 env:
   NODE_VERSION: "19.4.0"
 defaults:
@@ -7,8 +10,8 @@ defaults:
     shell: bash
     working-directory: RNTemplate
 jobs:
-  commit:
-    name: "Commit Stage"
+  merge:
+    name: "Merge Stage"
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
@@ -31,4 +34,4 @@ jobs:
         run: yarn
 
       - name: "Type-Checking/Linting/Formatting"
-        run: yarn precommit
+        run: yarn postcommit
