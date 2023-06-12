@@ -2,12 +2,17 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { HomeScreen } from '@app/screens/Authenticated/HomeScreen';
+import { splashScreen } from '@app/services/SplashScreen';
 
 const Stack = createNativeStackNavigator();
 
 export const NavigationRoot = () => {
   return (
-    <NavigationContainer>
+    <NavigationContainer
+      onReady={() => {
+        splashScreen.hide();
+      }}
+    >
       <Stack.Navigator>
         <Stack.Screen name="Home" component={HomeScreen} />
       </Stack.Navigator>
