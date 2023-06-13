@@ -1,10 +1,12 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import { HomeScreen } from '@app/screens/Authenticated/HomeScreen';
 import { splashScreen } from '@app/services/SplashScreen';
+import { HomeScreen } from '@app/screens/Authenticated/HomeScreen';
+import { AccountScreen } from '@app/screens/Authenticated/AccountScreen';
+import { RootStackParamList } from '@app/screens/types';
 
-const Stack = createNativeStackNavigator();
+const RootStack = createNativeStackNavigator<RootStackParamList>();
 
 export const NavigationRoot = () => {
   return (
@@ -13,9 +15,10 @@ export const NavigationRoot = () => {
         splashScreen.hide();
       }}
     >
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
-      </Stack.Navigator>
+      <RootStack.Navigator>
+        <RootStack.Screen name="Home" component={HomeScreen} />
+        <RootStack.Screen name="Account" component={AccountScreen} />
+      </RootStack.Navigator>
     </NavigationContainer>
   );
 };
